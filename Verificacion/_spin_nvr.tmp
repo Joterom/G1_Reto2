@@ -1,16 +1,11 @@
-never spec {    /* !((([] ((! (((r_state==RAQUETA)) && ((btn_der==btn_izq)))) || (<> ((raq==0))))) && ([] ((! (((r_state==RAQUETA)) && (btn_der))) || (<> ((raq==1)))))) && ([] ((! (((r_state==RAQUETA)) && (btn_der))) || (<> ((raq==1)))))) */
+never spec {    /* !([] ((! (((r_state==RAQUETA)) && ((btn_der==btn_izq)))) || (<> ((mov==0))))) */
 T0_init:
 	do
-	:: (! ((! (((r_state==RAQUETA)) && (btn_der)))) && ! (((raq==1)))) -> goto accept_S5
-	:: (! ((! (((r_state==RAQUETA)) && ((btn_der==btn_izq))))) && ! (((raq==0)))) -> goto accept_S10
+	:: (! ((! (((r_state==RAQUETA)) && ((btn_der==btn_izq))))) && ! (((mov==0)))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
-accept_S5:
+accept_S4:
 	do
-	:: (! (((raq==1)))) -> goto accept_S5
-	od;
-accept_S10:
-	do
-	:: (! (((raq==0)))) -> goto accept_S10
+	:: (! (((mov==0)))) -> goto accept_S4
 	od;
 }

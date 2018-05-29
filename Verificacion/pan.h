@@ -102,7 +102,7 @@
 #ifndef NFAIR
 	#define NFAIR	2	/* must be >= 2 */
 #endif
-#define HAS_LTL	1
+#define ETIM	1
 #define HAS_CODE	1
 #if defined(RANDSTORE) && !defined(RANDSTOR)
 	#define RANDSTOR	RANDSTORE
@@ -121,16 +121,10 @@
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	5	/* np_ */
+	#define VERI	4	/* np_ */
 #endif
 #if defined(NOCLAIM) && defined(NP)
 	#undef NOCLAIM
-#endif
-#ifndef NOCLAIM
-	#define NCLAIMS	1
-	#ifndef NP
-		#define VERI	4
-	#endif
 #endif
 
 typedef struct S_F_MAP {
@@ -139,45 +133,38 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define _nstates4	21	/* spec */
-#define minseq4	85
-#define maxseq4	104
-#define _endstate4	20
+#define _nstates3	23	/* entorno */
+#define minseq3	91
+#define maxseq3	112
+#define _endstate3	22
 
-#define _nstates3	18	/* entorno */
-#define minseq3	68
-#define maxseq3	84
-#define _endstate3	17
+#define _nstates2	54	/* fsm_pelota */
+#define minseq2	38
+#define maxseq2	90
+#define _endstate2	53
 
-#define _nstates2	34	/* fsm_pelota */
-#define minseq2	35
-#define maxseq2	67
-#define _endstate2	33
-
-#define _nstates1	25	/* fsm_raqueta */
+#define _nstates1	28	/* fsm_raqueta */
 #define minseq1	11
-#define maxseq1	34
-#define _endstate1	24
+#define maxseq1	37
+#define _endstate1	27
 
 #define _nstates0	12	/* fsm_pantalla */
 #define minseq0	0
 #define maxseq0	10
 #define _endstate0	11
 
-extern short src_ln4[];
 extern short src_ln3[];
 extern short src_ln2[];
 extern short src_ln1[];
 extern short src_ln0[];
-extern S_F_MAP src_file4[];
 extern S_F_MAP src_file3[];
 extern S_F_MAP src_file2[];
 extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	39
-#define _T2	40
+#define _T5	42
+#define _T2	43
 #define WS		8 /* word size in bytes */
 #define SYNC	0
 #define ASYNC	0
@@ -191,16 +178,6 @@ extern S_F_MAP src_file0[];
 		#define NCORE	1
 	#endif
 #endif
-
-typedef struct P4 { /* spec */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P4;
-#define Air4	(sizeof(P4) - 3)
 
 #define Pentorno	((P3 *)this)
 typedef struct P3 { /* entorno */
@@ -246,15 +223,15 @@ typedef struct P0 { /* fsm_pantalla */
 } P0;
 #define Air0	(sizeof(P0) - 3)
 
-typedef struct P5 { /* np_ */
+typedef struct P4 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-} P5;
-#define Air5	(sizeof(P5) - 3)
+} P4;
+#define Air4	(sizeof(P4) - 3)
 
 #define Pclaim	P0
 #ifndef NCLAIMS
@@ -446,16 +423,18 @@ typedef struct State {
 		unsigned short _event;
 	#endif
 #endif
+	unsigned raqueta_timeout : 1;
+	unsigned pelota_timeout : 1;
 	unsigned btn_der : 1;
 	unsigned btn_izq : 1;
-	unsigned camino_libre : 1;
+	unsigned choca_izq : 1;
+	unsigned choca_der : 1;
 	unsigned choca_suelo : 1;
-	unsigned choca_techo_raqueta : 1;
-	unsigned choca_paredes : 1;
+	unsigned choca_raqueta : 1;
+	unsigned choca_techo : 1;
 	uchar s_state;
 	uchar r_state;
 	uchar b_state;
-	int raq;
 #ifdef TRIX
 	/* room for 512 proc+chan ptrs, + safety margin */
 	char *_ids_[MAXPROC+MAXQ+4];
@@ -477,23 +456,28 @@ typedef struct TRIX_v6 {
 #endif
 
 #define HAS_TRACK	0
+/* hidden variable: */	uchar camino_libre;
+/* hidden variable: */	uchar choca_paredes;
+/* hidden variable: */	uchar end;
+/* hidden variable: */	int mov;
+/* hidden variable: */	int movx;
+/* hidden variable: */	int movy;
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	5
-#define _nstates5	3 /* np_ */
-#define _endstate5	2 /* np_ */
+#define _NP_	4
+#define _nstates4	3 /* np_ */
+#define _endstate4	2 /* np_ */
 
-#define _start5	0 /* np_ */
-#define _start4	7
-#define _start3	14
+#define _start4	0 /* np_ */
+#define _start3	19
 #define _start2	1
 #define _start1	1
 #define _start0	1
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	2 /* user-defined accept labels */
+	#define ACCEPT_LAB	0 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -849,7 +833,7 @@ void qsend(int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	41
+#define NTRANS	44
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);
