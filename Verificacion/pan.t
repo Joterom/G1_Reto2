@@ -22,173 +22,182 @@ settable(void)
 {	Trans *T;
 	Trans *settr(int, int, int, int, int, char *, int, int, int);
 
-	trans = (Trans ***) emalloc(6*sizeof(Trans **));
-
-	/* proctype 4: spec */
-
-	trans[4] = (Trans **) emalloc(21*sizeof(Trans *));
-
-	trans[4][8]	= settr(92,0,7,1,0,".(goto)", 0, 2, 0);
-	T = trans[4][7] = settr(91,0,0,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(91,0,1,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(91,0,3,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(91,0,5,0,0,"DO", 0, 2, 0);
-	trans[4][1]	= settr(85,0,12,3,0,"((!(!(((r_state==RAQUETA)&&btn_der)))&&!((raq==1))))", 1, 2, 0);
-	trans[4][2]	= settr(86,0,12,1,0,"goto accept_S5", 0, 2, 0);
-	trans[4][3]	= settr(87,0,17,4,0,"((!(!(((r_state==RAQUETA)&&(btn_der==btn_izq))))&&!((raq==0))))", 1, 2, 0);
-	trans[4][4]	= settr(88,0,17,1,0,"goto accept_S10", 0, 2, 0);
-	trans[4][5]	= settr(89,0,7,1,0,"(1)", 0, 2, 0);
-	trans[4][6]	= settr(90,0,7,1,0,"goto T0_init", 0, 2, 0);
-	trans[4][9]	= settr(93,0,12,1,0,"break", 0, 2, 0);
-	trans[4][13]	= settr(97,0,12,1,0,".(goto)", 0, 2, 0);
-	T = trans[4][12] = settr(96,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(96,0,10,0,0,"DO", 0, 2, 0);
-	trans[4][10]	= settr(94,0,12,5,0,"(!((raq==1)))", 1, 2, 0);
-	trans[4][11]	= settr(95,0,12,1,0,"goto accept_S5", 0, 2, 0);
-	trans[4][14]	= settr(98,0,17,1,0,"break", 0, 2, 0);
-	trans[4][18]	= settr(102,0,17,1,0,".(goto)", 0, 2, 0);
-	T = trans[4][17] = settr(101,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(101,0,15,0,0,"DO", 0, 2, 0);
-	trans[4][15]	= settr(99,0,17,6,0,"(!((raq==0)))", 1, 2, 0);
-	trans[4][16]	= settr(100,0,17,1,0,"goto accept_S10", 0, 2, 0);
-	trans[4][19]	= settr(103,0,20,1,0,"break", 0, 2, 0);
-	trans[4][20]	= settr(104,0,0,7,7,"-end-", 0, 3500, 0);
+	trans = (Trans ***) emalloc(5*sizeof(Trans **));
 
 	/* proctype 3: entorno */
 
-	trans[3] = (Trans **) emalloc(18*sizeof(Trans *));
+	trans[3] = (Trans **) emalloc(23*sizeof(Trans *));
 
-	trans[3][15]	= settr(82,0,14,1,0,".(goto)", 0, 2, 0);
-	T = trans[3][14] = settr(81,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(81,0,9,0,0,"DO", 0, 2, 0);
-	T = trans[3][9] = settr(76,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,1,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,2,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,3,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,4,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,5,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,6,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(76,0,7,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(76,0,8,0,0,"IF", 0, 2, 0);
-	trans[3][1]	= settr(68,0,11,8,8,"btn_der = 1", 1, 2, 0);
-	trans[3][10]	= settr(77,0,11,1,0,".(goto)", 0, 2, 0);
-	trans[3][2]	= settr(69,0,11,9,9,"btn_der = 0", 1, 2, 0);
-	trans[3][3]	= settr(70,0,11,10,10,"btn_izq = 1", 1, 2, 0);
-	trans[3][4]	= settr(71,0,11,11,11,"btn_izq = 0", 1, 2, 0);
-	trans[3][5]	= settr(72,0,11,12,12,"choca_paredes = 1", 1, 2, 0);
-	trans[3][6]	= settr(73,0,11,13,13,"camino_libre = 1", 1, 2, 0);
-	trans[3][7]	= settr(74,0,11,14,14,"choca_techo_raqueta = 1", 1, 2, 0);
-	trans[3][8]	= settr(75,0,11,15,15,"choca_suelo = 1", 1, 2, 0);
-	trans[3][11]	= settr(78,0,12,16,0,"printf('Estado raqueta: %d, Estado pelota: %d, Estado pantalla: %d',r_state,b_state,s_state)", 1, 2, 0);
-	trans[3][12]	= settr(79,0,13,17,0,"printf('\\n choca_paredes: %d, camino_libre: %d, choca_techo_raqueta: %d, choca_suelo: %d',choca_paredes,camino_libre,choca_techo_raqueta,choca_suelo)", 1, 2, 0);
-	trans[3][13]	= settr(80,0,14,18,0,"printf('\\n Boton derecha: %d, Boton izquierda: %d, Raqueta: %d\\n',btn_der,btn_izq,raq)", 1, 2, 0);
-	trans[3][16]	= settr(83,0,17,1,0,"break", 0, 2, 0);
-	trans[3][17]	= settr(84,0,0,19,19,"-end-", 0, 3500, 0);
+	trans[3][20]	= settr(110,0,19,1,0,".(goto)", 0, 2, 0);
+	T = trans[3][19] = settr(109,0,0,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(109,0,14,0,0,"DO", 0, 2, 0);
+	T = trans[3][14] = settr(104,0,0,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,1,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,2,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,3,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,4,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,5,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,6,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,7,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,8,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,9,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,10,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,11,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(104,0,12,0,0,"IF", 0, 2, 0);
+	    T->nxt	= settr(104,0,13,0,0,"IF", 0, 2, 0);
+	trans[3][1]	= settr(91,0,16,3,3,"btn_der = 1", 1, 2, 0);
+	trans[3][15]	= settr(105,0,16,1,0,".(goto)", 0, 2, 0);
+	trans[3][2]	= settr(92,0,16,4,4,"btn_der = 0", 1, 2, 0);
+	trans[3][3]	= settr(93,0,16,5,5,"btn_izq = 0", 1, 2, 0);
+	trans[3][4]	= settr(94,0,16,6,6,"btn_izq = 1", 1, 2, 0);
+	trans[3][5]	= settr(95,0,16,7,7,"choca_paredes = 1", 1, 2, 0);
+	trans[3][6]	= settr(96,0,16,8,8,"camino_libre = 1", 1, 2, 0);
+	trans[3][7]	= settr(97,0,16,9,9,"choca_raqueta = 1", 1, 2, 0);
+	trans[3][8]	= settr(98,0,16,10,10,"choca_techo = 1", 1, 2, 0);
+	trans[3][9]	= settr(99,0,16,11,11,"choca_suelo = 1", 1, 2, 0);
+	trans[3][10]	= settr(100,0,16,12,12,"choca_izq = 1", 1, 2, 0);
+	trans[3][11]	= settr(101,0,16,13,13,"choca_der = 1", 1, 2, 0);
+	trans[3][12]	= settr(102,0,16,14,14,"pelota_timeout = 1", 1, 2, 0);
+	trans[3][13]	= settr(103,0,16,15,15,"raqueta_timeout = 1", 1, 2, 0);
+	trans[3][16]	= settr(106,0,17,16,0,"printf('\\n Estado raqueta: %d, Estado pelota: %d, Estado pantalla: %d',r_state,b_state,s_state)", 1, 2, 0);
+	trans[3][17]	= settr(107,0,18,17,0,"printf('\\n choca_paredes: %d, camino_libre: %d, choca_techo: %d, choca_raqueta: %d, choca_suelo: %d',choca_paredes,camino_libre,choca_techo,choca_raqueta,choca_suelo)", 1, 2, 0);
+	trans[3][18]	= settr(108,0,19,18,0,"printf('\\n Boton derecha: %d, Boton izquierda: %d, Raqueta: %d\\n',btn_der,btn_izq,mov)", 1, 2, 0);
+	trans[3][21]	= settr(111,0,22,1,0,"break", 0, 2, 0);
+	trans[3][22]	= settr(112,0,0,19,19,"-end-", 0, 3500, 0);
 
 	/* proctype 2: fsm_pelota */
 
-	trans[2] = (Trans **) emalloc(34*sizeof(Trans *));
+	trans[2] = (Trans **) emalloc(54*sizeof(Trans *));
 
-	trans[2][1]	= settr(35,0,30,20,20,"b_state = PELOTA", 1, 2, 0);
-	trans[2][31]	= settr(65,0,30,1,0,".(goto)", 0, 2, 0);
-	T = trans[2][30] = settr(64,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(64,0,2,0,0,"DO", 0, 2, 0);
-	trans[2][2]	= settr(36,0,29,21,0,"((b_state==PELOTA))", 1, 2, 0);
-	T = trans[ 2][29] = settr(63,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(63,2,27,0,0,"ATOMIC", 1, 2, 0);
-	T = trans[2][27] = settr(61,2,0,0,0,"IF", 1, 2, 0);
-	T = T->nxt	= settr(61,2,3,0,0,"IF", 1, 2, 0);
-	T = T->nxt	= settr(61,2,9,0,0,"IF", 1, 2, 0);
-	T = T->nxt	= settr(61,2,15,0,0,"IF", 1, 2, 0);
-	    T->nxt	= settr(61,2,21,0,0,"IF", 1, 2, 0);
-	trans[2][3]	= settr(37,0,30,22,22,"(choca_paredes)", 1, 2, 0); /* m: 4 -> 30,0 */
+	trans[2][1]	= settr(38,0,50,20,20,"b_state = PELOTA", 1, 2, 0);
+	trans[2][51]	= settr(88,0,50,1,0,".(goto)", 0, 2, 0);
+	T = trans[2][50] = settr(87,0,0,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(87,0,2,0,0,"DO", 0, 2, 0);
+	trans[2][2]	= settr(39,0,49,21,0,"((b_state==PELOTA))", 1, 2, 0);
+	T = trans[ 2][49] = settr(86,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(86,2,47,0,0,"ATOMIC", 1, 2, 0);
+	T = trans[2][47] = settr(84,2,0,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(84,2,3,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(84,2,10,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(84,2,17,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(84,2,24,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(84,2,32,0,0,"IF", 1, 2, 0);
+	    T->nxt	= settr(84,2,39,0,0,"IF", 1, 2, 0);
+	trans[2][3]	= settr(40,0,50,22,22,"(choca_der)", 1, 2, 0); /* m: 4 -> 50,0 */
 	reached2[4] = 1;
 	trans[2][4]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
-	trans[2][5]	= settr(0,0,0,0,0,"choca_paredes = 0",0,0,0);
-	trans[2][6]	= settr(0,0,0,0,0,"camino_libre = 0",0,0,0);
-	trans[2][7]	= settr(0,0,0,0,0,"choca_techo_raqueta = 0",0,0,0);
+	trans[2][5]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][6]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][7]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
 	trans[2][8]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
-	trans[2][28]	= settr(62,0,30,23,23,".(goto)", 1, 2, 0);
-	trans[2][9]	= settr(43,0,30,24,24,"(camino_libre)", 1, 2, 0); /* m: 10 -> 30,0 */
-	reached2[10] = 1;
-	trans[2][10]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
-	trans[2][11]	= settr(0,0,0,0,0,"choca_paredes = 0",0,0,0);
-	trans[2][12]	= settr(0,0,0,0,0,"camino_libre = 0",0,0,0);
-	trans[2][13]	= settr(0,0,0,0,0,"choca_techo_raqueta = 0",0,0,0);
-	trans[2][14]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
-	trans[2][15]	= settr(49,0,30,25,25,"(choca_suelo)", 1, 2, 0); /* m: 16 -> 30,0 */
-	reached2[16] = 1;
-	trans[2][16]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
-	trans[2][17]	= settr(0,0,0,0,0,"choca_paredes = 0",0,0,0);
-	trans[2][18]	= settr(0,0,0,0,0,"camino_libre = 0",0,0,0);
-	trans[2][19]	= settr(0,0,0,0,0,"choca_techo_raqueta = 0",0,0,0);
-	trans[2][20]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
-	trans[2][21]	= settr(55,0,30,26,26,"(choca_techo_raqueta)", 1, 2, 0); /* m: 22 -> 30,0 */
-	reached2[22] = 1;
-	trans[2][22]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
-	trans[2][23]	= settr(0,0,0,0,0,"choca_paredes = 0",0,0,0);
-	trans[2][24]	= settr(0,0,0,0,0,"camino_libre = 0",0,0,0);
-	trans[2][25]	= settr(0,0,0,0,0,"choca_techo_raqueta = 0",0,0,0);
-	trans[2][26]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
-	trans[2][32]	= settr(66,0,33,1,0,"break", 0, 2, 0);
-	trans[2][33]	= settr(67,0,0,27,27,"-end-", 0, 3500, 0);
+	trans[2][9]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][48]	= settr(85,0,50,23,23,".(goto)", 1, 2, 0);
+	trans[2][10]	= settr(47,0,50,24,24,"(choca_izq)", 1, 2, 0); /* m: 11 -> 50,0 */
+	reached2[11] = 1;
+	trans[2][11]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
+	trans[2][12]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][13]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][14]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
+	trans[2][15]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
+	trans[2][16]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][17]	= settr(54,0,50,25,25,"(choca_raqueta)", 1, 2, 0); /* m: 18 -> 50,0 */
+	reached2[18] = 1;
+	trans[2][18]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
+	trans[2][19]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][20]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][21]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
+	trans[2][22]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
+	trans[2][23]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][24]	= settr(61,0,50,26,26,"(choca_suelo)", 1, 2, 0); /* m: 25 -> 50,0 */
+	reached2[25] = 1;
+	trans[2][25]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
+	trans[2][26]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][27]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][28]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
+	trans[2][29]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][30]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
+	trans[2][31]	= settr(0,0,0,0,0,"end = 1",0,0,0);
+	trans[2][32]	= settr(69,0,50,27,27,"(choca_techo)", 1, 2, 0); /* m: 33 -> 50,0 */
+	reached2[33] = 1;
+	trans[2][33]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
+	trans[2][34]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][35]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][36]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
+	trans[2][37]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
+	trans[2][38]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][39]	= settr(76,0,50,28,28,"(pelota_timeout)", 1, 2, 0); /* m: 40 -> 50,0 */
+	reached2[40] = 1;
+	trans[2][40]	= settr(0,0,0,0,0,"b_state = PELOTA",0,0,0);
+	trans[2][41]	= settr(0,0,0,0,0,"choca_der = 0",0,0,0);
+	trans[2][42]	= settr(0,0,0,0,0,"choca_izq = 0",0,0,0);
+	trans[2][43]	= settr(0,0,0,0,0,"choca_raqueta = 0",0,0,0);
+	trans[2][44]	= settr(0,0,0,0,0,"choca_suelo = 0",0,0,0);
+	trans[2][45]	= settr(0,0,0,0,0,"choca_techo = 0",0,0,0);
+	trans[2][46]	= settr(0,0,0,0,0,"pelota_timeout = 0",0,0,0);
+	trans[2][52]	= settr(89,0,53,1,0,"break", 0, 2, 0);
+	trans[2][53]	= settr(90,0,0,29,29,"-end-", 0, 3500, 0);
 
 	/* proctype 1: fsm_raqueta */
 
-	trans[1] = (Trans **) emalloc(25*sizeof(Trans *));
+	trans[1] = (Trans **) emalloc(28*sizeof(Trans *));
 
-	trans[1][1]	= settr(11,0,21,28,28,"r_state = RAQUETA", 1, 2, 0);
-	trans[1][22]	= settr(32,0,21,1,0,".(goto)", 0, 2, 0);
-	T = trans[1][21] = settr(31,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(31,0,2,0,0,"DO", 0, 2, 0);
-	trans[1][2]	= settr(12,0,20,29,0,"((r_state==RAQUETA))", 1, 2, 0);
-	T = trans[ 1][20] = settr(30,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(30,2,18,0,0,"ATOMIC", 1, 2, 0);
-	T = trans[1][18] = settr(28,2,0,0,0,"IF", 1, 2, 0);
-	T = T->nxt	= settr(28,2,3,0,0,"IF", 1, 2, 0);
-	T = T->nxt	= settr(28,2,8,0,0,"IF", 1, 2, 0);
-	    T->nxt	= settr(28,2,13,0,0,"IF", 1, 2, 0);
-	trans[1][3]	= settr(13,0,21,30,30,"((btn_der==btn_izq))", 1, 2, 0); /* m: 4 -> 21,0 */
+	trans[1][1]	= settr(11,0,24,30,30,"r_state = RAQUETA", 1, 2, 0);
+	trans[1][25]	= settr(35,0,24,1,0,".(goto)", 0, 2, 0);
+	T = trans[1][24] = settr(34,0,0,0,0,"DO", 0, 2, 0);
+	    T->nxt	= settr(34,0,2,0,0,"DO", 0, 2, 0);
+	trans[1][2]	= settr(12,0,23,31,0,"((r_state==RAQUETA))", 1, 2, 0);
+	T = trans[ 1][23] = settr(33,2,0,0,0,"ATOMIC", 1, 2, 0);
+	T->nxt	= settr(33,2,21,0,0,"ATOMIC", 1, 2, 0);
+	T = trans[1][21] = settr(31,2,0,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(31,2,3,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(31,2,8,0,0,"IF", 1, 2, 0);
+	T = T->nxt	= settr(31,2,13,0,0,"IF", 1, 2, 0);
+	    T->nxt	= settr(31,2,18,0,0,"IF", 1, 2, 0);
+	trans[1][3]	= settr(13,0,24,32,32,"((btn_der==btn_izq))", 1, 2, 0); /* m: 4 -> 24,0 */
 	reached1[4] = 1;
 	trans[1][4]	= settr(0,0,0,0,0,"r_state = RAQUETA",0,0,0);
 	trans[1][5]	= settr(0,0,0,0,0,"btn_der = 0",0,0,0);
 	trans[1][6]	= settr(0,0,0,0,0,"btn_izq = 0",0,0,0);
-	trans[1][7]	= settr(0,0,0,0,0,"raq = 0",0,0,0);
-	trans[1][19]	= settr(29,0,21,31,31,".(goto)", 1, 2, 0);
-	trans[1][8]	= settr(18,0,21,32,32,"((btn_der&&!(btn_izq)))", 1, 2, 0); /* m: 9 -> 21,0 */
+	trans[1][7]	= settr(0,0,0,0,0,"mov = 0",0,0,0);
+	trans[1][22]	= settr(32,0,24,33,33,".(goto)", 1, 2, 0);
+	trans[1][8]	= settr(18,0,24,34,34,"((btn_der&&!(btn_izq)))", 1, 2, 0); /* m: 9 -> 24,0 */
 	reached1[9] = 1;
 	trans[1][9]	= settr(0,0,0,0,0,"r_state = RAQUETA",0,0,0);
 	trans[1][10]	= settr(0,0,0,0,0,"btn_der = 0",0,0,0);
 	trans[1][11]	= settr(0,0,0,0,0,"btn_izq = 0",0,0,0);
-	trans[1][12]	= settr(0,0,0,0,0,"raq = 1",0,0,0);
-	trans[1][13]	= settr(23,0,21,33,33,"((btn_izq&&!(btn_der)))", 1, 2, 0); /* m: 14 -> 21,0 */
+	trans[1][12]	= settr(0,0,0,0,0,"mov = 1",0,0,0);
+	trans[1][13]	= settr(23,0,24,35,35,"((btn_izq&&!(btn_der)))", 1, 2, 0); /* m: 14 -> 24,0 */
 	reached1[14] = 1;
 	trans[1][14]	= settr(0,0,0,0,0,"r_state = RAQUETA",0,0,0);
 	trans[1][15]	= settr(0,0,0,0,0,"btn_izq = 0",0,0,0);
 	trans[1][16]	= settr(0,0,0,0,0,"btn_der = 0",0,0,0);
-	trans[1][17]	= settr(0,0,0,0,0,"raq = 2",0,0,0);
-	trans[1][23]	= settr(33,0,24,1,0,"break", 0, 2, 0);
-	trans[1][24]	= settr(34,0,0,34,34,"-end-", 0, 3500, 0);
+	trans[1][17]	= settr(0,0,0,0,0,"mov = 2",0,0,0);
+	trans[1][18]	= settr(28,0,24,36,36,"(raqueta_timeout)", 1, 2, 0); /* m: 19 -> 24,0 */
+	reached1[19] = 1;
+	trans[1][19]	= settr(0,0,0,0,0,"r_state = RAQUETA",0,0,0);
+	trans[1][20]	= settr(0,0,0,0,0,"raqueta_timeout = 0",0,0,0);
+	trans[1][26]	= settr(36,0,27,1,0,"break", 0, 2, 0);
+	trans[1][27]	= settr(37,0,0,37,37,"-end-", 0, 3500, 0);
 
 	/* proctype 0: fsm_pantalla */
 
 	trans[0] = (Trans **) emalloc(12*sizeof(Trans *));
 
-	trans[0][1]	= settr(0,0,8,35,35,"s_state = PANTALLA", 1, 2, 0);
+	trans[0][1]	= settr(0,0,8,38,38,"s_state = PANTALLA", 1, 2, 0);
 	trans[0][9]	= settr(8,0,8,1,0,".(goto)", 0, 2, 0);
 	T = trans[0][8] = settr(7,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(7,0,2,0,0,"DO", 0, 2, 0);
-	trans[0][2]	= settr(1,0,7,36,0,"((s_state==PANTALLA))", 1, 2, 0);
+	trans[0][2]	= settr(1,0,7,39,0,"((s_state==PANTALLA))", 1, 2, 0);
 	T = trans[ 0][7] = settr(6,2,0,0,0,"ATOMIC", 1, 2, 0);
-	T->nxt	= settr(6,2,5,0,0,"ATOMIC", 1, 2, 0);
-	T = trans[0][5] = settr(4,2,0,0,0,"IF", 1, 2, 0);
-	    T->nxt	= settr(4,2,3,0,0,"IF", 1, 2, 0);
-	trans[0][3]	= settr(2,0,8,37,37,"(1)", 1, 2, 0); /* m: 4 -> 8,0 */
+	T->nxt	= settr(6,2,5,0,0,"ATOMIC", 1, 3000, 0);
+	T = trans[0][5] = settr(4,2,0,0,0,"IF", 1, 3000, 0);
+	    T->nxt	= settr(4,2,3,0,0,"IF", 1, 3000, 0);
+	trans[0][3]	= settr(2,0,8,40,40,"(timeout)", 1, 3000, 0); /* m: 4 -> 8,0 */
 	reached0[4] = 1;
 	trans[0][4]	= settr(0,0,0,0,0,"s_state = PANTALLA",0,0,0);
-	trans[0][6]	= settr(5,0,8,1,0,".(goto)", 1, 2, 0);
+	trans[0][6]	= settr(5,0,8,1,0,".(goto)", 1, 3000, 0);
 	trans[0][10]	= settr(9,0,11,1,0,"break", 0, 2, 0);
-	trans[0][11]	= settr(10,0,0,38,38,"-end-", 0, 3500, 0);
+	trans[0][11]	= settr(10,0,0,41,41,"-end-", 0, 3500, 0);
 	/* np_ demon: */
 	trans[_NP_] = (Trans **) emalloc(3*sizeof(Trans *));
 	T = trans[_NP_][0] = settr(9997,0,1,_T5,0,"(np_)", 1,2,0);
